@@ -4071,7 +4071,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
         {
             Name (_HID, EisaId ("PNP0A08") /* PCI Express Bus */)  // _HID: Hardware ID
             Name (_CID, EisaId ("PNP0A03") /* PCI Bus */)  // _CID: Compatible ID
-            Name (_ADR, Zero)  // _ADR: Address
             Method (^BN00, 0, NotSerialized)
             {
                 Return (Zero)

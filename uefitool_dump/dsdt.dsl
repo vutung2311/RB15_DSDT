@@ -21000,47 +21000,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     Return (Zero)
                 }
             }
-            OperationRegion (VRTC, SystemCMOS, Zero, 0x10)
-            Field (VRTC, ByteAcc, Lock, Preserve)
-            {
-                SEC,    8, 
-                SECA,   8, 
-                MIN,    8, 
-                MINA,   8, 
-                HOR,    8, 
-                HORA,   8, 
-                DAYW,   8, 
-                DAY,    8, 
-                MON,    8, 
-                YEAR,   8, 
-                STAA,   8, 
-                STAB,   8, 
-                STAC,   8, 
-                STAD,   8
-            }
-
-            Method (FBC, 1, Serialized)
-            {
-                Store (Arg0, Local0)
-                Multiply (And (ShiftRight (Arg0, 0x04), 0x0F), 0x0A, Local1)
-                And (Local0, 0x0F, Local0)
-                Add (Local1, Local0, Local1)
-                Return (Local1)
-            }
-
-            Method (RTEC, 0, NotSerialized)
-            {
-                Store (YEAR, Local0)
-                Store (FBC (Local0), \_SB.PCI0.LPCB.EC0.RTYR) /* \_SB_.PCI0.LPCB.EC0_.RTYR */
-                Store (MON, Local0)
-                Store (FBC (Local0), \_SB.PCI0.LPCB.EC0.RTMH) /* \_SB_.PCI0.LPCB.EC0_.RTMH */
-                Store (DAY, Local0)
-                Store (FBC (Local0), \_SB.PCI0.LPCB.EC0.RTDY) /* \_SB_.PCI0.LPCB.EC0_.RTDY */
-                Store (HOR, Local0)
-                Store (FBC (Local0), \_SB.PCI0.LPCB.EC0.RTHR) /* \_SB_.PCI0.LPCB.EC0_.RTHR */
-                Store (MIN, Local0)
-                Store (FBC (Local0), \_SB.PCI0.LPCB.EC0.RTME) /* \_SB_.PCI0.LPCB.EC0_.RTME */
-            }
         }
 
         Device (TIMR)
@@ -23437,7 +23396,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     {
         D8XH (One, 0xAB)
         ADBG ("_WAK")
-        \_SB.PCI0.LPCB.RTC.RTEC ()
+        \_SB.PCI0.LPCB.EC0.RTEC ()
         If (NEXP)
         {
             If (And (OSCC, 0x02))
@@ -57077,6 +57036,47 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             Name (LPWS, 0xFF)
             Name (ECUP, Zero)
             Mutex (ECMT, 0x00)
+            OperationRegion (VRTC, SystemCMOS, Zero, 0x10)
+            Field (VRTC, ByteAcc, Lock, Preserve)
+            {
+                SEC,    8, 
+                SECA,   8, 
+                MIN,    8, 
+                MINA,   8, 
+                HOR,    8, 
+                HORA,   8, 
+                DAYW,   8, 
+                DAY,    8, 
+                MON,    8, 
+                YEAR,   8, 
+                STAA,   8, 
+                STAB,   8, 
+                STAC,   8, 
+                STAD,   8
+            }
+
+            Method (FBC, 1, Serialized)
+            {
+                Store (Arg0, Local0)
+                Multiply (And (ShiftRight (Arg0, 0x04), 0x0F), 0x0A, Local1)
+                And (Local0, 0x0F, Local0)
+                Add (Local1, Local0, Local1)
+                Return (Local1)
+            }
+
+            Method (RTEC, 0, NotSerialized)
+            {
+                Store (YEAR, Local0)
+                Store (FBC (Local0), RTYR) /* \_SB_.PCI0.LPCB.EC0_.RTYR */
+                Store (MON, Local0)
+                Store (FBC (Local0), RTMH) /* \_SB_.PCI0.LPCB.EC0_.RTMH */
+                Store (DAY, Local0)
+                Store (FBC (Local0), RTDY) /* \_SB_.PCI0.LPCB.EC0_.RTDY */
+                Store (HOR, Local0)
+                Store (FBC (Local0), RTHR) /* \_SB_.PCI0.LPCB.EC0_.RTHR */
+                Store (MIN, Local0)
+                Store (FBC (Local0), RTME) /* \_SB_.PCI0.LPCB.EC0_.RTME */
+            }
 
             Method (_GPE, 0, NotSerialized)  // _GPE: General Purpose Events
             {
@@ -57095,7 +57095,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                 {
                     Store (One, ECON) /* \_SB_.PCI0.LPCB.EC0_.ECON */
                     Store (One, ECN0) /* \_SB_.PCI0.LPCB.EC0_.ECN0 */
-                    \_SB.PCI0.LPCB.RTC.RTEC ()
+                    RTEC ()
                     And (PSTA, 0x04, Local0)
                     Store (Zero, LIDS) /* External reference */
                     If (Local0)

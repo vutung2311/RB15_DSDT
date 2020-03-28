@@ -244,7 +244,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     External (DIDX, UnknownObj)
     External (ELNG, IntObj)
     External (EMNA, IntObj)
-    External (ESPC, UnknownObj)    // Conflicts with a later declaration
     External (GSMI, UnknownObj)
     External (IGDS, UnknownObj)
     External (LHIH, UnknownObj)
@@ -283,7 +282,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
     External (PDOF, MethodObj)    // 0 Arguments
     External (PDON, MethodObj)    // 0 Arguments
     External (PMST.PMC4, FieldUnitObj)
-    External (PSON, UnknownObj)    // Conflicts with a later declaration
     External (SGGP, UnknownObj)
     External (SGMD, UnknownObj)
     External (TBTD, MethodObj)    // 2 Arguments

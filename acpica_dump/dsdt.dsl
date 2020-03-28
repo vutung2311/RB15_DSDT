@@ -18,7 +18,7 @@
  *     Compiler ID      "INTL"
  *     Compiler Version 0x20160527 (538314023)
  */
-DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
+DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x0107200A)
 {
     External (_GPE.AL6F, MethodObj)    // 0 Arguments
     External (_GPE.HLVT, MethodObj)    // 0 Arguments

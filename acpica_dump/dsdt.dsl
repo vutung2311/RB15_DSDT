@@ -15441,13 +15441,13 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
 
     Scope (\)
     {
+        OperationRegion (THBA, SystemMemory, 0xFE200000, 0x10)
+        Field (THBA, DWordAcc, NoLock, Preserve)
+        {
+            DO00,   32
+        }
         Method (THEN, 0, Serialized)
         {
-            OperationRegion (THBA, SystemMemory, 0xFE200000, 0x10)
-            Field (THBA, DWordAcc, NoLock, Preserve)
-            {
-                DO00,   32
-            }
 
             Return (LNotEqual (DO00, 0xFFFFFFFF))
         }
@@ -22611,6 +22611,12 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             }
         }
 
+        OperationRegion (SPRT, SystemIO, 0xB2, 0x02)
+        Field (SPRT, ByteAcc, Lock, Preserve)
+        {
+            SSMP,   8
+        }
+
         Method (XTBT, 2, Serialized)
         {
             ADBG ("XTBT")
@@ -22649,12 +22655,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             If (GNIS (Arg0, Arg1))
             {
                 Return (Zero)
-            }
-
-            OperationRegion (SPRT, SystemIO, 0xB2, 0x02)
-            Field (SPRT, ByteAcc, Lock, Preserve)
-            {
-                SSMP,   8
             }
 
             ADBG ("TBT-HP-Handler")
@@ -23207,17 +23207,17 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
         }
     }
 
+    OperationRegion (U3F8, SystemIO, 0x03F8, 0x10)
+    Field (U3F8, ByteAcc, Lock, Preserve)
+    {
+        TXBF,   8, 
+        DLM,    8, 
+        FCR,    8, 
+        LCR,    8
+    }
+
     Method (SDBG, 1, Serialized)
     {
-        OperationRegion (U3F8, SystemIO, 0x03F8, 0x10)
-        Field (U3F8, ByteAcc, Lock, Preserve)
-        {
-            TXBF,   8, 
-            DLM,    8, 
-            FCR,    8, 
-            LCR,    8
-        }
-
         Store (0x83, LCR) /* \SDBG.LCR_ */
         Store (One, TXBF) /* \SDBG.TXBF */
         Store (Zero, DLM) /* \SDBG.DLM_ */

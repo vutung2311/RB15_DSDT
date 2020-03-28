@@ -55816,18 +55816,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     {
                         Return (Zero)
                     }
-                    Case (0x03)
-                    {
-                        Return (Zero)
-                    }
-                    Case (0x03)
-                    {
-                        Return (Zero)
-                    }
-                    Case (0x30)
-                    {
-                        Return (Zero)
-                    }
                     Case (0xC4)
                     {
                         Return (Zero)
@@ -55849,14 +55837,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                         Return (Zero)
                     }
                     Case (0xC8)
-                    {
-                        Return (Zero)
-                    }
-                    Case (0x78)
-                    {
-                        Return (Zero)
-                    }
-                    Case (0xA0)
                     {
                         Return (Zero)
                     }
@@ -55922,15 +55902,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     Case (0x45)
                     {
                     }
-                    Case (0x03)
-                    {
-                    }
-                    Case (0x03)
-                    {
-                    }
-                    Case (0x30)
-                    {
-                    }
                     Case (0xC4)
                     {
                     }
@@ -55947,12 +55918,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     {
                     }
                     Case (0xC8)
-                    {
-                    }
-                    Case (0x78)
-                    {
-                    }
-                    Case (0xA0)
                     {
                     }
                     Case (0xA0)

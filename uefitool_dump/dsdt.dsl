@@ -21005,6 +21005,24 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     Return (Zero)
                 }
             }
+            OperationRegion (VRTC, SystemCMOS, Zero, 0x10)
+            Field (VRTC, ByteAcc, Lock, Preserve)
+            {
+                SEC,    8,
+                SECA,   8,
+                MIN,    8,
+                MINA,   8,
+                HOR,    8,
+                HORA,   8,
+                DAYW,   8,
+                DAY,    8,
+                MON,    8,
+                YEAR,   8,
+                STAA,   8,
+                STAB,   8,
+                STAC,   8,
+                STAD,   8
+            }
         }
 
         Device (TIMR)
@@ -57076,24 +57094,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             Name (LPWS, 0xFF)
             Name (ECUP, Zero)
             Mutex (ECMT, 0x00)
-            OperationRegion (VRTC, SystemCMOS, Zero, 0x10)
-            Field (VRTC, ByteAcc, Lock, Preserve)
-            {
-                SEC,    8, 
-                SECA,   8, 
-                MIN,    8, 
-                MINA,   8, 
-                HOR,    8, 
-                HORA,   8, 
-                DAYW,   8, 
-                DAY,    8, 
-                MON,    8, 
-                YEAR,   8, 
-                STAA,   8, 
-                STAB,   8, 
-                STAC,   8, 
-                STAD,   8
-            }
 
             Method (FBC, 1, Serialized)
             {
@@ -57106,15 +57106,15 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
 
             Method (RTEC, 0, NotSerialized)
             {
-                Local0 = YEAR /* \_SB_.PCI0.LPCB.EC0_.YEAR */
+                Local0 = ^^RTC.YEAR /* \_SB_.PCI0.LPCB.RTC_.YEAR */
                 RTYR = FBC (Local0)
-                Local0 = MON /* \_SB_.PCI0.LPCB.EC0_.MON_ */
+                Local0 = ^^RTC.MON /* \_SB_.PCI0.LPCB.RTC_.MON_ */
                 RTMH = FBC (Local0)
-                Local0 = DAY /* \_SB_.PCI0.LPCB.EC0_.DAY_ */
+                Local0 = ^^RTC.DAY /* \_SB_.PCI0.LPCB.RTC_.DAY_ */
                 RTDY = FBC (Local0)
-                Local0 = HOR /* \_SB_.PCI0.LPCB.EC0_.HOR_ */
+                Local0 = ^^RTC.HOR /* \_SB_.PCI0.LPCB.RTC_.HOR_ */
                 RTHR = FBC (Local0)
-                Local0 = MIN /* \_SB_.PCI0.LPCB.EC0_.MIN_ */
+                Local0 = ^^RTC.MIN /* \_SB_.PCI0.LPCB.RTC_.MIN_ */
                 RTME = FBC (Local0)
             }
 

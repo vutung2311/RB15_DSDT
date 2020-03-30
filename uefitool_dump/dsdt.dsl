@@ -20999,6 +20999,24 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     Return (Zero)
                 }
             }
+            OperationRegion (VRTC, SystemCMOS, Zero, 0x10)
+            Field (VRTC, ByteAcc, Lock, Preserve)
+            {
+                SEC,    8,
+                SECA,   8,
+                MIN,    8,
+                MINA,   8,
+                HOR,    8,
+                HORA,   8,
+                DAYW,   8,
+                DAY,    8,
+                MON,    8,
+                YEAR,   8,
+                STAA,   8,
+                STAB,   8,
+                STAC,   8,
+                STAD,   8
+            }
         }
 
         Device (TIMR)
@@ -57033,24 +57051,6 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             Name (LPWS, 0xFF)
             Name (ECUP, Zero)
             Mutex (ECMT, 0x00)
-            OperationRegion (VRTC, SystemCMOS, Zero, 0x10)
-            Field (VRTC, ByteAcc, Lock, Preserve)
-            {
-                SEC,    8, 
-                SECA,   8, 
-                MIN,    8, 
-                MINA,   8, 
-                HOR,    8, 
-                HORA,   8, 
-                DAYW,   8, 
-                DAY,    8, 
-                MON,    8, 
-                YEAR,   8, 
-                STAA,   8, 
-                STAB,   8, 
-                STAC,   8, 
-                STAD,   8
-            }
 
             Method (FBC, 1, Serialized)
             {
@@ -57063,15 +57063,15 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
 
             Method (RTEC, 0, NotSerialized)
             {
-                Store (YEAR, Local0)
+                FromBCD (^^RTC.YEAR, Local0)
                 Store (FBC (Local0), RTYR) /* \_SB_.PCI0.LPCB.EC0_.RTYR */
-                Store (MON, Local0)
+                FromBCD (^^RTC.MON, Local0)
                 Store (FBC (Local0), RTMH) /* \_SB_.PCI0.LPCB.EC0_.RTMH */
-                Store (DAY, Local0)
+                FromBCD (^^RTC.DAY, Local0)
                 Store (FBC (Local0), RTDY) /* \_SB_.PCI0.LPCB.EC0_.RTDY */
-                Store (HOR, Local0)
+                FromBCD (^^RTC.HOR, Local0)
                 Store (FBC (Local0), RTHR) /* \_SB_.PCI0.LPCB.EC0_.RTHR */
-                Store (MIN, Local0)
+                FromBCD (^^RTC.MIN, Local0)
                 Store (FBC (Local0), RTME) /* \_SB_.PCI0.LPCB.EC0_.RTME */
             }
 

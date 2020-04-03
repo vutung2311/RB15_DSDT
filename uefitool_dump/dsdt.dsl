@@ -57483,7 +57483,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             Method (RECR, 1, Serialized)
             {
                 Local0 = Acquire (ECMT, 0x05DC)
-                If (ECON)
+                If (!Local0 && ECON)
                 {
                     ECAD = Arg0
                     ECMD = 0x80
@@ -57496,7 +57496,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     Release (ECMT)
                     Return (Local1)
                 }
-                Else
+                ElseIf (!Local0)
                 {
                     Release (ECMT)
                 }
@@ -57507,7 +57507,7 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
             Method (RECW, 2, Serialized)
             {
                 Local0 = Acquire (ECMT, 0x05DC)
-                If (ECON)
+                If (!Local0 && ECON)
                 {
                     ECDT = Arg0
                     ECAD = Arg1
@@ -57518,7 +57518,9 @@ DefinitionBlock ("", "DSDT", 2, "ALASKA", "A M I ", 0x01072009)
                     }
                 }
 
-                Release (ECMT)
+                If (!Local0) {
+                    Release (ECMT)
+                }
             }
 
             Method (ECR2, 2, Serialized)
